@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>W Store - Akun Free Fire</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #101026;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #1a1a3d;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      z-index: 999;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    nav a {
+      color: #00e6e6;
+      text-decoration: none;
+      font-weight: bold;
+      background: #1f1f3d;
+      padding: 8px 15px;
+      border-radius: 5px;
+    }
+    nav a:hover {
+      background: #00e6e6;
+      color: #000;
+    }
+    h1 {
+      text-align: center;
+      color: #00e6e6;
+      margin-top: 80px;
+    }
+    .filter-skin {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+      background: #1a1a3d;
+      border-radius: 10px;
+    }
+    .filter-skin label {
+      margin-right: 10px;
+      display: inline-block;
+    }
+    .akun-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .akun-card {
+      background: #1c1c3c;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .akun-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .akun-card h3 {
+      margin: 0;
+      color: #00e6e6;
+    }
+    .akun-card p {
+      margin: 5px 0;
+    }
+    .btn-wa {
+      margin-top: 10px;
+      background: #25d366;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">🏠 Beranda</a>
+    <a href="ml.html">🔥 Akun ML</a>
+    <a href="ff.html">💥 Akun FF</a>
+  </nav>  <h1>Daftar Akun Free Fire</h1>  <div class="filter-skin">
+    <strong>Filter Skin/Bundle:</strong><br>
+    <label><input type="checkbox" value="Celana Angel"> Celana Angel</label>
+    <label><input type="checkbox" value="Bundle Cobra"> Bundle Cobra</label>
+    <label><input type="checkbox" value="Sakura Bundle"> Sakura Bundle</label>
+    <label><input type="checkbox" value="AK Blue Flame"> AK Blue Flame</label>
+  </div>  <div class="akun-container" id="akunList"></div>  <script>
+    const akunData = [
+      {
+        rank: 'Heroic',
+        skins: ['Sakura Bundle', 'AK Blue Flame'],
+        harga: 'Rp 95.000',
+        gambar: 'https://i.imgur.com/EEgCEM5.jpg'
+      },
+      {
+        rank: 'Diamond',
+        skins: ['Bundle Cobra', 'Celana Angel'],
+        harga: 'Rp 70.000',
+        gambar: 'https://i.imgur.com/VJHLr5q.jpg'
+      },
+      {
+        rank: 'Platinum',
+        skins: ['Celana Angel'],
+        harga: 'Rp 60.000',
+        gambar: 'https://i.imgur.com/jEv5A1S.jpg'
+      }
+    ];
+
+    const akunList = document.getElementById('akunList');
+    const skinCheckboxes = document.querySelectorAll('.filter-skin input[type="checkbox"]');
+
+    function tampilkanAkun() {
+      const filterSkins = Array.from(skinCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+      akunList.innerHTML = '';
+
+      const hasil = akunData.filter(akun => {
+        if (filterSkins.length === 0) return true;
+        return filterSkins.every(skin => akun.skins.includes(skin));
+      });
+
+      if (hasil.length === 0) {
+        akunList.innerHTML = '<p style="text-align:center;">Tidak ditemukan akun sesuai filter.</p>';
+        return;
+      }
+
+      hasil.forEach((akun) => {
+        const skinList = akun.skins.join(', ');
+        const pesanWA = `https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20akun%20Free%20Fire%20(${akun.rank})%20dengan%20item:%20${encodeURIComponent(skinList)}%20-%20Harga%20${encodeURIComponent(akun.harga)}`;
+
+        akunList.innerHTML += `
+          <div class="akun-card">
+            <img src="${akun.gambar}" alt="Akun FF">
+            <h3>Rank: ${akun.rank}</h3>
+            <p>Item: ${skinList}</p>
+            <p>Harga: <strong>${akun.harga}</strong></p>
+            <a class="btn-wa" href="${pesanWA}" target="_blank">Beli via WhatsApp</a>
+          </div>
+        `;
+      });
+    }
+
+    skinCheckboxes.forEach(cb => cb.addEventListener('change', tampilkanAkun));
+    tampilkanAkun();
+  </script></body>
+</html>
