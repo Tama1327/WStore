@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>W Store - Akun Mobile Legends</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f2d;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ffd700;
+    }
+    .filter-skin {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+      background: #1f1f3d;
+      border-radius: 10px;
+    }
+    .filter-skin label {
+      margin-right: 10px;
+      display: inline-block;
+    }
+    .akun-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .akun-card {
+      background: #1c1c3c;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .akun-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .akun-card h3 {
+      margin: 0;
+      color: #ffd700;
+    }
+    .akun-card p {
+      margin: 5px 0;
+    }
+    .btn-wa {
+      margin-top: 10px;
+      background: #25d366;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Daftar Akun Mobile Legends</h1>  <div class="filter-skin">
+    <strong>Filter Skin:</strong><br>
+    <label><input type="checkbox" value="Roger Epic Limited"> Roger Epic Limited</label>
+    <label><input type="checkbox" value="Freya Legend"> Freya Legend</label>
+    <label><input type="checkbox" value="Fanny Starlight"> Fanny Starlight</label>
+    <label><input type="checkbox" value="Hayabusa Shura"> Hayabusa Shura</label>
+  </div>  <div class="akun-container" id="akunList"></div>  <script>
+    const akunData = [
+      {
+        rank: 'Mythic',
+        skins: ['Roger Epic Limited', 'Freya Legend'],
+        harga: 'Rp 120.000',
+        gambar: 'https://i.imgur.com/zI2WQ38.jpg'
+      },
+      {
+        rank: 'Legend',
+        skins: ['Fanny Starlight', 'Hayabusa Shura'],
+        harga: 'Rp 90.000',
+        gambar: 'https://i.imgur.com/1mVcthH.jpg'
+      },
+      {
+        rank: 'Epic',
+        skins: ['Freya Legend'],
+        harga: 'Rp 80.000',
+        gambar: 'https://i.imgur.com/pFsHHQv.jpg'
+      }
+    ];
+
+    const akunList = document.getElementById('akunList');
+    const skinCheckboxes = document.querySelectorAll('.filter-skin input[type="checkbox"]');
+
+    function tampilkanAkun() {
+      const filterSkins = Array.from(skinCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+      akunList.innerHTML = '';
+
+      const hasil = akunData.filter(akun => {
+        if (filterSkins.length === 0) return true;
+        return filterSkins.every(skin => akun.skins.includes(skin));
+      });
+
+      if (hasil.length === 0) {
+        akunList.innerHTML = '<p style="text-align:center;">Tidak ditemukan akun sesuai filter.</p>';
+        return;
+      }
+
+      hasil.forEach((akun) => {
+        const skinList = akun.skins.join(', ');
+        const pesanWA = `https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20akun%20ML%20(${akun.rank})%20dengan%20skin:%20${encodeURIComponent(skinList)}%20-%20Harga%20${encodeURIComponent(akun.harga)}`;
+
+        akunList.innerHTML += `
+          <div class="akun-card">
+            <img src="${akun.gambar}" alt="Akun ML">
+            <h3>Rank: ${akun.rank}</h3>
+            <p>Skin: ${skinList}</p>
+            <p>Harga: <strong>${akun.harga}</strong></p>
+            <a class="btn-wa" href="${pesanWA}" target="_blank">Beli via WhatsApp</a>
+          </div>
+        `;
+      });
+    }
+
+    skinCheckboxes.forEach(cb => cb.addEventListener('change', tampilkanAkun));
+    tampilkanAkun();
+  </script></body>
+</html>
