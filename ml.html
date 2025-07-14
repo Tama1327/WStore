@@ -2,163 +2,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>W Store - Akun Mobile Legends</title>
+  <title>Daftar Akun Mobile Legends</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f0f2d;
-      color: #fff;
-      margin: 0;
-      padding: 0;
+    body { font-family: Arial, sans-serif; background: #0d0f1a; color: white; margin: 0; padding: 0; }
+    .navbar { background: #1a1d2e; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .filter-btn { background: #00f7ff; border: none; padding: 8px 12px; color: #000; font-weight: bold; border-radius: 5px; cursor: pointer; }
+    .filter-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95); z-index: 9999; color: white; padding: 20px; overflow-y: auto;
     }
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: #1f1f3d;
-      padding: 10px 0;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      z-index: 999;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    .filter-overlay.active { display: block; }
+    .filter-section { margin-bottom: 20px; }
+    .filter-section label { display: block; margin-bottom: 5px; }
+    .card {
+      background: #1f2337; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.5);
     }
-    nav a {
-      color: #ffd700;
-      text-decoration: none;
-      font-weight: bold;
-      background: #2c2c5c;
-      padding: 8px 15px;
-      border-radius: 5px;
-    }
-    nav a:hover {
-      background: #ffd700;
-      color: #000;
-    }
-    h1 {
-      text-align: center;
-      color: #ffd700;
-      margin-top: 80px;
-    }
-    .filter-skin {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 10px;
-      background: #1f1f3d;
-      border-radius: 10px;
-    }
-    .filter-skin label {
-      margin-right: 10px;
-      display: inline-block;
-    }
-    .akun-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-    .akun-card {
-      background: #1c1c3c;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .akun-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .akun-card h3 {
-      margin: 0;
-      color: #ffd700;
-    }
-    .akun-card p {
-      margin: 5px 0;
-    }
-    .btn-wa {
-      margin-top: 10px;
-      background: #25d366;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
+    .hidden { display: none; }
+    .apply-btn {
+      background: limegreen; color: white; border: none; padding: 10px 20px;
+      font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">🏠 Beranda</a>
-    <a href="ml.html">🔥 Akun ML</a>
-    <a href="ff.html">💥 Akun FF</a>
-  </nav>  <h1>Daftar Akun Mobile Legends</h1>  <div class="filter-skin">
-    <strong>Filter Skin:</strong><br>
-    <label><input type="checkbox" value="Roger Epic Limited"> Roger Epic Limited</label>
-    <label><input type="checkbox" value="Freya Legend"> Freya Legend</label>
-    <label><input type="checkbox" value="Fanny Starlight"> Fanny Starlight</label>
-    <label><input type="checkbox" value="Hayabusa Shura"> Hayabusa Shura</label>
-  </div>  <div class="akun-container" id="akunList"></div>  <script>
-    const akunData = [
-      {
-        rank: 'Mythic',
-        skins: ['Roger Epic Limited', 'Freya Legend'],
-        harga: 'Rp 120.000',
-        gambar: 'https://i.imgur.com/zI2WQ38.jpg'
-      },
-      {
-        rank: 'Legend',
-        skins: ['Fanny Starlight', 'Hayabusa Shura'],
-        harga: 'Rp 90.000',
-        gambar: 'https://i.imgur.com/1mVcthH.jpg'
-      },
-      {
-        rank: 'Epic',
-        skins: ['Freya Legend'],
-        harga: 'Rp 80.000',
-        gambar: 'https://i.imgur.com/pFsHHQv.jpg'
-      }
-    ];
+  <div class="navbar">
+    <h2>Akun Mobile Legends</h2>
+    <button class="filter-btn" onclick="openFilter()">🔍 Filter</button>
+  </div>  <!-- FILTER OVERLAY -->  <div class="filter-overlay" id="filterOverlay">
+    <h2>Filter Akun</h2><div class="filter-section">
+  <label>Skin Unggulan:</label>
+  <label><input type="checkbox" name="skin" value="roger"> Roger Epic Limited</label>
+  <label><input type="checkbox" name="skin" value="freya"> Freya Legend</label>
+  <label><input type="checkbox" name="skin" value="fanny"> Fanny StarLight</label>
+</div>
 
-    const akunList = document.getElementById('akunList');
-    const skinCheckboxes = document.querySelectorAll('.filter-skin input[type="checkbox"]');
+<div class="filter-section">
+  <label>Rank:</label>
+  <label><input type="radio" name="rank" value="mythic"> Mythic</label>
+  <label><input type="radio" name="rank" value="epic"> Epic</label>
+  <label><input type="radio" name="rank" value="legend"> Legend</label>
+</div>
 
-    function tampilkanAkun() {
-      const filterSkins = Array.from(skinCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
-      akunList.innerHTML = '';
+<div class="filter-section">
+  <label>Harga:</label>
+  <label><input type="radio" name="harga" value="low"> Di bawah 100K</label>
+  <label><input type="radio" name="harga" value="mid"> 100K - 300K</label>
+  <label><input type="radio" name="harga" value="high"> Di atas 300K</label>
+</div>
 
-      const hasil = akunData.filter(akun => {
-        if (filterSkins.length === 0) return true;
-        return filterSkins.every(skin => akun.skins.includes(skin));
-      });
+<button class="apply-btn" onclick="applyFilter()">Terapkan</button>
 
-      if (hasil.length === 0) {
-        akunList.innerHTML = '<p style="text-align:center;">Tidak ditemukan akun sesuai filter.</p>';
-        return;
-      }
-
-      hasil.forEach((akun) => {
-        const skinList = akun.skins.join(', ');
-        const pesanWA = `https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20akun%20ML%20(${akun.rank})%20dengan%20skin:%20${encodeURIComponent(skinList)}%20-%20Harga%20${encodeURIComponent(akun.harga)}`;
-
-        akunList.innerHTML += `
-          <div class="akun-card">
-            <img src="${akun.gambar}" alt="Akun ML">
-            <h3>Rank: ${akun.rank}</h3>
-            <p>Skin: ${skinList}</p>
-            <p>Harga: <strong>${akun.harga}</strong></p>
-            <a class="btn-wa" href="${pesanWA}" target="_blank">Beli via WhatsApp</a>
-          </div>
-        `;
-      });
+  </div>  <!-- LIST AKUN (DUMMY) -->  <div class="card" data-skin="roger" data-rank="mythic" data-harga="high">Akun 1 - Roger Epic - Mythic - 350K</div>
+  <div class="card" data-skin="freya" data-rank="epic" data-harga="mid">Akun 2 - Freya Legend - Epic - 200K</div>
+  <div class="card" data-skin="fanny" data-rank="legend" data-harga="low">Akun 3 - Fanny StarLight - Legend - 95K</div>  <script>
+    function openFilter() {
+      document.getElementById('filterOverlay').classList.add('active');
     }
 
-    skinCheckboxes.forEach(cb => cb.addEventListener('change', tampilkanAkun));
-    tampilkanAkun();
+    function applyFilter() {
+      const selectedSkins = Array.from(document.querySelectorAll('input[name="skin"]:checked')).map(cb => cb.value);
+      const selectedRank = document.querySelector('input[name="rank"]:checked')?.value;
+      const selectedHarga = document.querySelector('input[name="harga"]:checked')?.value;
+
+      document.querySelectorAll('.card').forEach(card => {
+        const matchSkin = selectedSkins.length === 0 || selectedSkins.includes(card.dataset.skin);
+        const matchRank = !selectedRank || card.dataset.rank === selectedRank;
+        const matchHarga = !selectedHarga || card.dataset.harga === selectedHarga;
+        if (matchSkin && matchRank && matchHarga) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      document.getElementById('filterOverlay').classList.remove('active');
+    }
   </script></body>
 </html>
