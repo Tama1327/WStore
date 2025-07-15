@@ -17,6 +17,12 @@
     .card {
       background: #1f2337; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.5);
     }
+    .card h3 { margin-top: 0; }
+    .card p { margin: 5px 0; }
+    .wa-btn {
+      background-color: #25D366; color: white; padding: 10px 15px; border: none;
+      border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px;
+    }
     .hidden { display: none; }
     .apply-btn {
       background: limegreen; color: white; border: none; padding: 10px 20px;
@@ -52,9 +58,25 @@
 
 <button class="apply-btn" onclick="applyFilter()">Terapkan</button>
 
-  </div>  <!-- LIST AKUN (DUMMY) -->  <div class="card" data-skin="roger" data-rank="mythic" data-harga="high">Akun 1 - Roger Epic - Mythic - 350K</div>
-  <div class="card" data-skin="freya" data-rank="epic" data-harga="mid">Akun 2 - Freya Legend - Epic - 200K</div>
-  <div class="card" data-skin="fanny" data-rank="legend" data-harga="low">Akun 3 - Fanny StarLight - Legend - 95K</div>  <script>
+  </div>  <!-- LIST AKUN (DUMMY) -->  <div class="card" data-skin="roger" data-rank="mythic" data-harga="high">
+    <h3>Akun 1</h3>
+    <p>Skin: Roger Epic Limited</p>
+    <p>Rank: Mythic</p>
+    <p>Harga: 350K</p>
+    <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%201%20ML" target="_blank">Chat via WhatsApp</a>
+  </div>  <div class="card" data-skin="freya" data-rank="epic" data-harga="mid">
+    <h3>Akun 2</h3>
+    <p>Skin: Freya Legend</p>
+    <p>Rank: Epic</p>
+    <p>Harga: 200K</p>
+    <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%202%20ML" target="_blank">Chat via WhatsApp</a>
+  </div>  <div class="card" data-skin="fanny" data-rank="legend" data-harga="low">
+    <h3>Akun 3</h3>
+    <p>Skin: Fanny StarLight</p>
+    <p>Rank: Legend</p>
+    <p>Harga: 95K</p>
+    <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%203%20ML" target="_blank">Chat via WhatsApp</a>
+  </div>  <script>
     function openFilter() {
       document.getElementById('filterOverlay').classList.add('active');
     }
