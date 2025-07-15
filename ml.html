@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,49 +35,62 @@
   <div class="navbar">
     <h2>Akun Mobile Legends</h2>
     <button class="filter-btn" onclick="openFilter()">🔍 Filter</button>
-  </div>  <!-- FILTER OVERLAY -->  <div class="filter-overlay" id="filterOverlay">
-    <h2>Filter Akun</h2><div class="filter-section">
-  <label>Skin Unggulan:</label>
-  <label><input type="checkbox" name="skin" value="roger"> Roger Epic Limited</label>
-  <label><input type="checkbox" name="skin" value="freya"> Freya Legend</label>
-  <label><input type="checkbox" name="skin" value="fanny"> Fanny StarLight</label>
-</div>
+  </div>
 
-<div class="filter-section">
-  <label>Rank:</label>
-  <label><input type="radio" name="rank" value="mythic"> Mythic</label>
-  <label><input type="radio" name="rank" value="epic"> Epic</label>
-  <label><input type="radio" name="rank" value="legend"> Legend</label>
-</div>
+  <!-- FILTER OVERLAY -->
+  <div class="filter-overlay" id="filterOverlay">
+    <h2>Filter Akun</h2>
 
-<div class="filter-section">
-  <label>Harga:</label>
-  <label><input type="radio" name="harga" value="low"> Di bawah 100K</label>
-  <label><input type="radio" name="harga" value="mid"> 100K - 300K</label>
-  <label><input type="radio" name="harga" value="high"> Di atas 300K</label>
-</div>
+    <div class="filter-section">
+      <label>Skin Unggulan:</label>
+      <label><input type="checkbox" name="skin" value="roger"> Roger Epic Limited</label>
+      <label><input type="checkbox" name="skin" value="freya"> Freya Legend</label>
+      <label><input type="checkbox" name="skin" value="fanny"> Fanny StarLight</label>
+    </div>
 
-<button class="apply-btn" onclick="applyFilter()">Terapkan</button>
+    <div class="filter-section">
+      <label>Rank:</label>
+      <label><input type="radio" name="rank" value="mythic"> Mythic</label>
+      <label><input type="radio" name="rank" value="epic"> Epic</label>
+      <label><input type="radio" name="rank" value="legend"> Legend</label>
+    </div>
 
-  </div>  <!-- LIST AKUN (DUMMY) -->  <div class="card" data-skin="roger" data-rank="mythic" data-harga="high">
+    <div class="filter-section">
+      <label>Harga:</label>
+      <label><input type="radio" name="harga" value="low"> Di bawah 100K</label>
+      <label><input type="radio" name="harga" value="mid"> 100K - 300K</label>
+      <label><input type="radio" name="harga" value="high"> Di atas 300K</label>
+    </div>
+
+    <button class="apply-btn" onclick="applyFilter()">Terapkan</button>
+  </div>
+
+  <!-- LIST AKUN (DUMMY) -->
+  <div class="card" data-skin="roger" data-rank="mythic" data-harga="high">
     <h3>Akun 1</h3>
     <p>Skin: Roger Epic Limited</p>
     <p>Rank: Mythic</p>
     <p>Harga: 350K</p>
     <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%201%20ML" target="_blank">Chat via WhatsApp</a>
-  </div>  <div class="card" data-skin="freya" data-rank="epic" data-harga="mid">
+  </div>
+
+  <div class="card" data-skin="freya" data-rank="epic" data-harga="mid">
     <h3>Akun 2</h3>
     <p>Skin: Freya Legend</p>
     <p>Rank: Epic</p>
     <p>Harga: 200K</p>
     <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%202%20ML" target="_blank">Chat via WhatsApp</a>
-  </div>  <div class="card" data-skin="fanny" data-rank="legend" data-harga="low">
+  </div>
+
+  <div class="card" data-skin="fanny" data-rank="legend" data-harga="low">
     <h3>Akun 3</h3>
     <p>Skin: Fanny StarLight</p>
     <p>Rank: Legend</p>
     <p>Harga: 95K</p>
     <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%203%20ML" target="_blank">Chat via WhatsApp</a>
-  </div>  <script>
+  </div>
+
+  <script>
     function openFilter() {
       document.getElementById('filterOverlay').classList.add('active');
     }
@@ -98,5 +112,7 @@
       });
       document.getElementById('filterOverlay').classList.remove('active');
     }
-  </script></body>
+  </script>
+</body>
 </html>
+      
