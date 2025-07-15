@@ -2,163 +2,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>W Store - Akun Free Fire</title>
+  <title>Daftar Akun Free Fire</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #101026;
-      color: #fff;
-      margin: 0;
-      padding: 0;
+    body { font-family: Arial, sans-serif; background: #0d0f1a; color: white; margin: 0; padding: 0; }
+    .navbar { background: #1a1d2e; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .filter-btn { background: #00f7ff; border: none; padding: 8px 12px; color: #000; font-weight: bold; border-radius: 5px; cursor: pointer; }
+    .filter-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95); z-index: 9999; color: white; padding: 20px; overflow-y: auto;
     }
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: #1a1a3d;
-      padding: 10px 0;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      z-index: 999;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    .filter-overlay.active { display: block; }
+    .filter-section { margin-bottom: 20px; }
+    .filter-section label { display: block; margin-bottom: 5px; }
+    .card {
+      background: #1f2337; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.5);
     }
-    nav a {
-      color: #00e6e6;
-      text-decoration: none;
-      font-weight: bold;
-      background: #1f1f3d;
-      padding: 8px 15px;
-      border-radius: 5px;
+    .card h3 { margin-top: 0; }
+    .card p { margin: 5px 0; }
+    .wa-btn {
+      background-color: #25D366; color: white; padding: 10px 15px; border: none;
+      border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px;
     }
-    nav a:hover {
-      background: #00e6e6;
-      color: #000;
-    }
-    h1 {
-      text-align: center;
-      color: #00e6e6;
-      margin-top: 80px;
-    }
-    .filter-skin {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 10px;
-      background: #1a1a3d;
-      border-radius: 10px;
-    }
-    .filter-skin label {
-      margin-right: 10px;
-      display: inline-block;
-    }
-    .akun-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-    .akun-card {
-      background: #1c1c3c;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .akun-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .akun-card h3 {
-      margin: 0;
-      color: #00e6e6;
-    }
-    .akun-card p {
-      margin: 5px 0;
-    }
-    .btn-wa {
-      margin-top: 10px;
-      background: #25d366;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
+    .hidden { display: none; }
+    .apply-btn {
+      background: limegreen; color: white; border: none; padding: 10px 20px;
+      font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">🏠 Beranda</a>
-    <a href="ml.html">🔥 Akun ML</a>
-    <a href="ff.html">💥 Akun FF</a>
-  </nav>  <h1>Daftar Akun Free Fire</h1>  <div class="filter-skin">
-    <strong>Filter Skin/Bundle:</strong><br>
-    <label><input type="checkbox" value="Celana Angel"> Celana Angel</label>
-    <label><input type="checkbox" value="Bundle Cobra"> Bundle Cobra</label>
-    <label><input type="checkbox" value="Sakura Bundle"> Sakura Bundle</label>
-    <label><input type="checkbox" value="AK Blue Flame"> AK Blue Flame</label>
-  </div>  <div class="akun-container" id="akunList"></div>  <script>
-    const akunData = [
-      {
-        rank: 'Heroic',
-        skins: ['Sakura Bundle', 'AK Blue Flame'],
-        harga: 'Rp 95.000',
-        gambar: 'https://i.imgur.com/EEgCEM5.jpg'
-      },
-      {
-        rank: 'Diamond',
-        skins: ['Bundle Cobra', 'Celana Angel'],
-        harga: 'Rp 70.000',
-        gambar: 'https://i.imgur.com/VJHLr5q.jpg'
-      },
-      {
-        rank: 'Platinum',
-        skins: ['Celana Angel'],
-        harga: 'Rp 60.000',
-        gambar: 'https://i.imgur.com/jEv5A1S.jpg'
-      }
-    ];
+  <div class="navbar">
+    <h2>Akun Free Fire</h2>
+    <button class="filter-btn" onclick="openFilter()">🔍 Filter</button>
+  </div>  <!-- FILTER OVERLAY -->  <div class="filter-overlay" id="filterOverlay">
+    <h2>Filter Akun</h2><div class="filter-section">
+  <label>Bundle Unggulan:</label>
+  <label><input type="checkbox" name="bundle" value="cobra"> Cobra</label>
+  <label><input type="checkbox" name="bundle" value="sultan"> Bundle Sultan</label>
+  <label><input type="checkbox" name="bundle" value="kelly"> Kelly Awakening</label>
+</div>
 
-    const akunList = document.getElementById('akunList');
-    const skinCheckboxes = document.querySelectorAll('.filter-skin input[type="checkbox"]');
+<div class="filter-section">
+  <label>Rank:</label>
+  <label><input type="radio" name="rank" value="heroic"> Heroic</label>
+  <label><input type="radio" name="rank" value="master"> Master</label>
+  <label><input type="radio" name="rank" value="diamond"> Diamond</label>
+</div>
 
-    function tampilkanAkun() {
-      const filterSkins = Array.from(skinCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
-      akunList.innerHTML = '';
+<div class="filter-section">
+  <label>Harga:</label>
+  <label><input type="radio" name="harga" value="low"> Di bawah 100K</label>
+  <label><input type="radio" name="harga" value="mid"> 100K - 300K</label>
+  <label><input type="radio" name="harga" value="high"> Di atas 300K</label>
+</div>
 
-      const hasil = akunData.filter(akun => {
-        if (filterSkins.length === 0) return true;
-        return filterSkins.every(skin => akun.skins.includes(skin));
-      });
+<button class="apply-btn" onclick="applyFilter()">Terapkan</button>
 
-      if (hasil.length === 0) {
-        akunList.innerHTML = '<p style="text-align:center;">Tidak ditemukan akun sesuai filter.</p>';
-        return;
-      }
-
-      hasil.forEach((akun) => {
-        const skinList = akun.skins.join(', ');
-        const pesanWA = `https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20akun%20Free%20Fire%20(${akun.rank})%20dengan%20item:%20${encodeURIComponent(skinList)}%20-%20Harga%20${encodeURIComponent(akun.harga)}`;
-
-        akunList.innerHTML += `
-          <div class="akun-card">
-            <img src="${akun.gambar}" alt="Akun FF">
-            <h3>Rank: ${akun.rank}</h3>
-            <p>Item: ${skinList}</p>
-            <p>Harga: <strong>${akun.harga}</strong></p>
-            <a class="btn-wa" href="${pesanWA}" target="_blank">Beli via WhatsApp</a>
-          </div>
-        `;
-      });
+  </div>  <!-- LIST AKUN (DUMMY) -->  <div class="card" data-bundle="cobra" data-rank="heroic" data-harga="high">
+    <h3>Akun 1</h3>
+    <p>Bundle: Cobra</p>
+    <p>Rank: Heroic</p>
+    <p>Harga: 350K</p>
+    <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%201%20Free%20Fire" target="_blank">Chat via WhatsApp</a>
+  </div>  <div class="card" data-bundle="sultan" data-rank="master" data-harga="mid">
+    <h3>Akun 2</h3>
+    <p>Bundle: Bundle Sultan</p>
+    <p>Rank: Master</p>
+    <p>Harga: 250K</p>
+    <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%202%20Free%20Fire" target="_blank">Chat via WhatsApp</a>
+  </div>  <div class="card" data-bundle="kelly" data-rank="diamond" data-harga="low">
+    <h3>Akun 3</h3>
+    <p>Bundle: Kelly Awakening</p>
+    <p>Rank: Diamond</p>
+    <p>Harga: 90K</p>
+    <a class="wa-btn" href="https://wa.me/62882008206525?text=Halo%20saya%20ingin%20beli%20Akun%203%20Free%20Fire" target="_blank">Chat via WhatsApp</a>
+  </div>  <script>
+    function openFilter() {
+      document.getElementById('filterOverlay').classList.add('active');
     }
 
-    skinCheckboxes.forEach(cb => cb.addEventListener('change', tampilkanAkun));
-    tampilkanAkun();
+    function applyFilter() {
+      const selectedBundles = Array.from(document.querySelectorAll('input[name="bundle"]:checked')).map(cb => cb.value);
+      const selectedRank = document.querySelector('input[name="rank"]:checked')?.value;
+      const selectedHarga = document.querySelector('input[name="harga"]:checked')?.value;
+
+      document.querySelectorAll('.card').forEach(card => {
+        const matchBundle = selectedBundles.length === 0 || selectedBundles.includes(card.dataset.bundle);
+        const matchRank = !selectedRank || card.dataset.rank === selectedRank;
+        const matchHarga = !selectedHarga || card.dataset.harga === selectedHarga;
+        if (matchBundle && matchRank && matchHarga) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      document.getElementById('filterOverlay').classList.remove('active');
+    }
   </script></body>
 </html>
